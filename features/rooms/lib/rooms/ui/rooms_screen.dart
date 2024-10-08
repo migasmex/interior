@@ -115,7 +115,7 @@ class _RoomsScreenState extends State<RoomsScreen> {
           ),
           actions: <Widget>[
             TextButton(
-              onPressed: () => Navigator.of(context).pop(),
+              onPressed: () => Navigator.of(context).pop,
               child: Text(
                 'Cancel',
                 style: TextStyle(color: colors.blackColor),
