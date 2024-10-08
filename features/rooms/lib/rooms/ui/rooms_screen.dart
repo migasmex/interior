@@ -67,7 +67,9 @@ class _RoomsScreenState extends State<RoomsScreen> {
                 itemCount: state.rooms.length,
               );
             } else if (state is RoomInitial) {
-              return const Center(child: Text('No rooms added yet.'));
+              return const Center(
+                child: Text('No rooms added yet.'),
+              );
             }
             return Container();
           },
@@ -94,8 +96,10 @@ class _RoomsScreenState extends State<RoomsScreen> {
       context: context,
       builder: (context) {
         return AlertDialog(
-          title:
-              Text('Add your room', style: TextStyle(color: colors.blackColor)),
+          title: Text(
+            'Add your room',
+            style: TextStyle(color: colors.blackColor),
+          ),
           content: TextField(
             style: TextStyle(color: colors.blackColor),
             controller: controller,
@@ -111,10 +115,11 @@ class _RoomsScreenState extends State<RoomsScreen> {
           ),
           actions: <Widget>[
             TextButton(
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-              child: Text('Cancel', style: TextStyle(color: colors.blackColor)),
+              onPressed: () => Navigator.of(context).pop(),
+              child: Text(
+                'Cancel',
+                style: TextStyle(color: colors.blackColor),
+              ),
             ),
             TextButton(
               onPressed: () {
@@ -124,7 +129,10 @@ class _RoomsScreenState extends State<RoomsScreen> {
                 }
                 Navigator.of(context).pop();
               },
-              child: Text('Add', style: TextStyle(color: colors.blackColor)),
+              child: Text(
+                'Add',
+                style: TextStyle(color: colors.blackColor),
+              ),
             )
           ],
         );

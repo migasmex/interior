@@ -13,8 +13,10 @@ class ProfileScreen extends StatelessWidget {
       backgroundColor: colors.primaryColor,
       appBar: AppBar(
         centerTitle: true,
-        title: Text('Nickname',
-            style: AppFonts.boldWhiteText.copyWith(fontSize: 24)),
+        title: Text(
+          'Nickname',
+          style: AppFonts.boldWhiteText.copyWith(fontSize: 24),
+        ),
         backgroundColor: colors.primaryColor,
         elevation: 0,
       ),
@@ -24,23 +26,28 @@ class ProfileScreen extends StatelessWidget {
             const CircleAvatar(
               radius: 90,
               backgroundImage: NetworkImage(
-                  'https://masterpiecer-images.s3.yandex.net/578a963b594a11ee927d363fac71b015:upscaled'),
+                'https://masterpiecer-images.s3.yandex.net/578a963b594a11ee927d363fac71b015:upscaled',
+              ),
             ),
-            const SizedBox(height: 16),
-            Text('Edit Profile',
-                style: AppFonts.boldWhiteText.copyWith(
-                  fontSize: 16,
-                  color: colors.white.withOpacity(0.6),
-                )),
-            const SizedBox(height: 32),
+            const SizedBox(height: AppDimens.PADDING_16),
+            Text(
+              'Edit Profile',
+              style: AppFonts.boldWhiteText.copyWith(
+                fontSize: 16,
+                color: colors.white.withOpacity(0.6),
+              ),
+            ),
+            const SizedBox(height: AppDimens.PADDING_32),
             CustomLabel(
-                textStyle: AppFonts.boldWhiteText,
-                label: 'Full name',
-                info: 'Name'),
+              textStyle: AppFonts.boldWhiteText,
+              label: 'Full name',
+              info: 'Name',
+            ),
             CustomLabel(
-                textStyle: AppFonts.boldWhiteText,
-                label: 'Email',
-                info: 'Email')
+              textStyle: AppFonts.boldWhiteText,
+              label: 'Email',
+              info: 'Email',
+            )
           ],
         ),
       ),
@@ -69,14 +76,18 @@ class CustomLabel extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(label, style: AppFonts.boldWhiteText),
+            Text(
+              label,
+              style: AppFonts.boldWhiteText,
+            ),
             Text(
               info,
               style: AppFonts.boldWhiteText.copyWith(
-                  color: Colors.white.withOpacity(0.6),
-                  fontSize: 16,
-                  fontWeight: FontWeight.w400),
-            )
+                color: Colors.white.withOpacity(0.6),
+                fontSize: 16,
+                fontWeight: FontWeight.w400,
+              ),
+            ),
           ],
         ),
       ),
