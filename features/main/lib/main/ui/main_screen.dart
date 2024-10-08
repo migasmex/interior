@@ -24,26 +24,28 @@ class _MainScreenState extends State<MainScreen> {
 
   @override
   Widget build(BuildContext context) {
-    const TextStyle textStyle = TextStyle(
-      color: Colors.white,
-      fontWeight: FontWeight.bold,
-      fontFamily: 'Montserrat',
-      fontSize: 20,
-    );
     final AppColors colors = AppColors.of(context);
     return Scaffold(
       body: _pages[selectedIndex],
       bottomNavigationBar: BottomNavigationBar(
         items: const [
-          BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
-          BottomNavigationBarItem(icon: Icon(Icons.person), label: 'Profile'),
           BottomNavigationBarItem(
-              icon: Icon(Icons.settings), label: 'Settings'),
+            icon: Icon(Icons.home),
+            label: 'Home',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.person),
+            label: 'Profile',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.settings),
+            label: 'Settings',
+          ),
         ],
         currentIndex: selectedIndex,
-        selectedLabelStyle: textStyle.copyWith(fontSize: 16),
-        unselectedLabelStyle: textStyle.copyWith(fontSize: 16),
-        selectedItemColor: const Color(0xFF008080),
+        selectedLabelStyle: AppFonts.boldWhiteText.copyWith(fontSize: 16),
+        unselectedLabelStyle: AppFonts.boldWhiteText.copyWith(fontSize: 16),
+        selectedItemColor: colors.tealColor,
         unselectedItemColor: colors.white,
         unselectedFontSize: 16,
         backgroundColor: colors.primaryColor,
