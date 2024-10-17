@@ -35,8 +35,8 @@ class DimensionsScreen extends StatelessWidget {
                 Text('Length: ${room.length}', style: AppFonts.boldWhiteText),
                 Text('Width: ${room.width}', style: AppFonts.boldWhiteText),
                 Text('Height: ${room.height}', style: AppFonts.boldWhiteText),
-                SizedBox(
-                  height: 10,
+                const SizedBox(
+                  height: AppDimens.PADDING_10,
                 ),
                 Text(
                   'Enter item dimensions',
@@ -44,11 +44,11 @@ class DimensionsScreen extends StatelessWidget {
                 ),
                 const SizedBox(height: AppDimens.PADDING_16),
                 CustomTextField(
-                    label: "Height:", contoller: itemHeightController),
+                    label: 'Height:', controller: itemHeightController),
                 CustomTextField(
-                    label: "Width:", contoller: itemWidthController),
+                    label: 'Width:', controller: itemWidthController),
                 CustomTextField(
-                    label: "Length:", contoller: itemLengthController),
+                    label: 'Length:', controller: itemLengthController),
                 const SizedBox(height: AppDimens.PADDING_20),
                 ElevatedButton(
                     style: ElevatedButton.styleFrom(
@@ -56,7 +56,7 @@ class DimensionsScreen extends StatelessWidget {
                         fixedSize: const Size.fromWidth(200)),
                     onPressed: () {},
                     child: Text(
-                      "Check",
+                      'Check',
                       style: AppFonts.boldWhiteText,
                     ))
               ],
@@ -68,10 +68,10 @@ class DimensionsScreen extends StatelessWidget {
 
 class CustomTextField extends StatelessWidget {
   const CustomTextField(
-      {super.key, required this.label, required this.contoller});
+      {super.key, required this.label, required this.controller});
 
   final String label;
-  final TextEditingController contoller;
+  final TextEditingController controller;
 
   @override
   Widget build(BuildContext context) {
