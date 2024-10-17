@@ -1,14 +1,34 @@
-import "package:flutter_bloc/flutter_bloc.dart";
+import 'package:domain/domain.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 part 'package:rooms/rooms/bloc/rooms_state.dart';
 
 class RoomCubit extends Cubit<RoomState> {
-  List<String> rooms = [];
+  final GetAllRoomsUseCase getAllRoomsUseCase;
+  final AddRoomUseCase addRoomUseCase;
 
-  RoomCubit() : super(RoomInitial());
+  RoomCubit({
+    required this.addRoomUseCase,
+    required this.getAllRoomsUseCase,
+  }) : super(RoomInitial());
 
-  void addRoom(String roomName) {
-    rooms.add(roomName);
-    emit(RoomAdded(List<String>.from(rooms)));
+  Future<void> fetchRooms() async {
+    try {
+      emit(RoomLoading());
+      final List<Room> rooms = await getAllRoomsUseCase.execute();
+      emit(RoomLoaded(rooms: rooms));
+    } catch (e) {
+      emit(RoomLoadingFailure('Failed'));
+    }
+  }
+
+  Future<void> addRoom(Room room) async {
+    try {
+      await addRoomUseCase.execute(room);
+      emit(RoomAdded(room));
+      await fetchRooms();
+    } catch (e) {
+      emit(RoomLoadingFailure('failed to add'));
+    }
   }
 }

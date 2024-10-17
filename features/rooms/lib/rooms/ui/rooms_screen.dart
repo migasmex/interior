@@ -1,11 +1,12 @@
-import 'package:auto_route/annotations.dart';
+import 'package:auto_route/auto_route.dart';
 import 'package:core_ui/core_ui.dart';
+import 'package:dimensions/dimensions.gm.dart';
+import 'package:domain/domain.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../bloc/rooms_cubit.dart';
 
-@RoutePage()
 class RoomsScreen extends StatefulWidget {
   const RoomsScreen({super.key});
 
@@ -14,37 +15,37 @@ class RoomsScreen extends StatefulWidget {
 }
 
 class _RoomsScreenState extends State<RoomsScreen> {
-  final List<String> rooms = [];
+  // final List<String> rooms = [];
+
+  void initState() {
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
     final AppColors colors = AppColors.of(context);
-    return BlocProvider(
-      create: (context) => RoomCubit(),
-      child: Scaffold(
-        backgroundColor: colors.primaryColor,
-        appBar: AppBar(
-          title: Text(
-            'Your rooms',
-            style: AppFonts.boldWhiteText.copyWith(fontSize: 24),
-          ),
-          centerTitle: true,
-          backgroundColor: colors.primaryColor,
-          elevation: 0,
+    return Scaffold(
+      backgroundColor: colors.primaryColor,
+      appBar: AppBar(
+        title: Text(
+          'Your rooms',
+          style: AppFonts.boldWhiteText.copyWith(fontSize: 24),
         ),
-        body: BlocBuilder<RoomCubit, RoomState>(
-          builder: (context, state) {
-            if (state is RoomAdded) {
-              return ListView.separated(
-                padding: const EdgeInsets.symmetric(
-                    horizontal: AppDimens.PADDING_28),
-                itemBuilder: (context, index) => GestureDetector(
+        centerTitle: true,
+        backgroundColor: colors.primaryColor,
+        elevation: 0,
+      ),
+      body: BlocBuilder<RoomCubit, RoomState>(
+        builder: (context, state) {
+          if (state is RoomLoaded) {
+            return ListView.separated(
+              padding:
+                  const EdgeInsets.symmetric(horizontal: AppDimens.PADDING_28),
+              itemBuilder: (context, index) {
+                final room = state.rooms[index];
+                return GestureDetector(
                   onTap: () {
-                    // Navigator.push(
-                    //     context,
-                    //     MaterialPageRoute(
-                    //         builder: (context) =>
-                    //             RoomScreen(roomName: rooms[index])));
+                    context.router.push(DimensionsRoute(room: room));
                   },
                   child: Container(
                     height: 80,
@@ -55,34 +56,34 @@ class _RoomsScreenState extends State<RoomsScreen> {
                     ),
                     child: Center(
                       child: Text(
-                        state.rooms[index],
+                        state.rooms[index].name,
                         style: AppFonts.boldWhiteText,
                       ),
                     ),
                   ),
-                ),
-                separatorBuilder: (context, index) => const SizedBox(
-                  height: 20,
-                ),
-                itemCount: state.rooms.length,
-              );
-            } else if (state is RoomInitial) {
-              return const Center(
-                child: Text('No rooms added yet.'),
-              );
-            }
-            return Container();
-          },
-        ),
-        floatingActionButton: FloatingActionButton(
-          onPressed: () {
-            addRoomShowDialog(context);
-          },
-          backgroundColor: colors.lightBlueColor,
-          child: Icon(
-            Icons.add,
-            color: colors.white,
-          ),
+                );
+              },
+              separatorBuilder: (context, index) => const SizedBox(
+                height: 20,
+              ),
+              itemCount: state.rooms.length,
+            );
+          } else if (state is RoomInitial) {
+            return const Center(
+              child: Text('No rooms added yet.'),
+            );
+          }
+          return Container();
+        },
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          addRoomShowDialog(context);
+        },
+        backgroundColor: colors.lightBlueColor,
+        child: Icon(
+          Icons.add,
+          color: colors.white,
         ),
       ),
     );
@@ -94,7 +95,7 @@ class _RoomsScreenState extends State<RoomsScreen> {
 
     showDialog(
       context: context,
-      builder: (context) {
+      builder: (dialogContext) {
         return AlertDialog(
           title: Text(
             'Add your room',
@@ -115,7 +116,7 @@ class _RoomsScreenState extends State<RoomsScreen> {
           ),
           actions: <Widget>[
             TextButton(
-              onPressed: () => Navigator.of(context).pop,
+              onPressed: () => Navigator.of(dialogContext).pop,
               child: Text(
                 'Cancel',
                 style: TextStyle(color: colors.blackColor),
@@ -123,11 +124,18 @@ class _RoomsScreenState extends State<RoomsScreen> {
             ),
             TextButton(
               onPressed: () {
-                final roomName = controller.text.trim();
+                final roomName = controller.text;
                 if (roomName.isNotEmpty) {
-                  context.read<RoomCubit>().addRoom(roomName);
+                  final roomCubit = context.read<RoomCubit>();
+                  final newRoom = Room(
+                    name: roomName,
+                    height: 300,
+                    width: 300,
+                    length: 300,
+                  );
+                  roomCubit.addRoom(newRoom);
+                  Navigator.of(dialogContext).pop();
                 }
-                Navigator.of(context).pop();
               },
               child: Text(
                 'Add',

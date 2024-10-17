@@ -2,7 +2,7 @@ import 'package:auto_route/annotations.dart';
 import 'package:core_ui/core_ui.dart';
 import 'package:flutter/material.dart';
 import 'package:profile/profile/ui/profile_screen.dart';
-import 'package:rooms/rooms/ui/rooms_screen.dart';
+import 'package:rooms/rooms/ui/rooms_wrap.dart';
 import 'package:settings/settings/ui/settings_screen.dart';
 
 @RoutePage()
@@ -17,7 +17,7 @@ class _MainScreenState extends State<MainScreen> {
   int selectedIndex = 0;
 
   final List<Widget> _pages = [
-    const RoomsScreen(),
+    const WrapperScreen(),
     const ProfileScreen(),
     const SettingsScreen(),
   ];

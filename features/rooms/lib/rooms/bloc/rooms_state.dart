@@ -4,8 +4,22 @@ abstract class RoomState {}
 
 class RoomInitial extends RoomState {}
 
-class RoomAdded extends RoomState {
-  final List<String> rooms;
+class RoomLoading extends RoomState {}
 
-  RoomAdded(this.rooms);
+class RoomLoaded extends RoomState {
+  final List<Room> rooms;
+
+  RoomLoaded({required this.rooms});
+}
+
+class RoomLoadingFailure extends RoomState {
+  final String message;
+
+  RoomLoadingFailure(this.message);
+}
+
+class RoomAdded extends RoomState {
+  final Room room;
+
+  RoomAdded(this.room);
 }
