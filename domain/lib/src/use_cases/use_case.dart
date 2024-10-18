@@ -23,8 +23,8 @@ class GetUserUseCase {
     required this.userRepository,
   });
 
-  Future<User> execute(int id) async {
-    return await userRepository.getUser(id);
+  Future<User> execute(int id) {
+    return userRepository.getUser(id);
   }
 }
 
@@ -35,8 +35,8 @@ class GetAllUsersUseCase {
     required this.userRepository,
   });
 
-  Future<List<User>> execute() async {
-    return await userRepository.getAllUsers();
+  Future<List<User>> execute() {
+    return userRepository.getAllUsers();
   }
 }
 
@@ -47,8 +47,8 @@ class GetRoomUseCase {
     required this.roomRepository,
   });
 
-  Future<Room> execute(String name) async {
-    return await roomRepository.getRoomDimensions(name);
+  Future<Room> execute(String name) {
+    return roomRepository.getRoomDimensions(name);
   }
 }
 
@@ -59,8 +59,8 @@ class GetAllRoomsUseCase {
     required this.roomRepository,
   });
 
-  Future<List<Room>> execute() async {
-    return await roomRepository.getAllRooms();
+  Future<List<Room>> execute() {
+    return roomRepository.getAllRooms();
   }
 }
 
@@ -72,6 +72,6 @@ class AddRoomUseCase {
   });
 
   Future<void> execute(Room room) async {
-    await roomRepository.addRoom(room);
+    return roomRepository.addRoom(room);
   }
 }

@@ -19,56 +19,79 @@ class DimensionsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final AppColors colors = AppColors.of(context);
     return Scaffold(
+      backgroundColor: colors.primaryColor,
+      appBar: AppBar(
         backgroundColor: colors.primaryColor,
-        appBar: AppBar(
-          backgroundColor: colors.primaryColor,
-          centerTitle: true,
-          title: Text(
-            room.name,
-            style: AppFonts.boldWhiteText.copyWith(fontSize: 24),
-          ),
+        centerTitle: true,
+        title: Text(
+          room.name,
+          style: AppFonts.boldWhiteText.copyWith(fontSize: 24),
         ),
-        body: SingleChildScrollView(
-          child: Center(
-            child: Column(
-              children: [
-                Text('Length: ${room.length}', style: AppFonts.boldWhiteText),
-                Text('Width: ${room.width}', style: AppFonts.boldWhiteText),
-                Text('Height: ${room.height}', style: AppFonts.boldWhiteText),
-                const SizedBox(
-                  height: AppDimens.PADDING_10,
+      ),
+      body: SingleChildScrollView(
+        child: Center(
+          child: Column(
+            children: [
+              Text(
+                'Length: ${room.length}',
+                style: AppFonts.boldWhiteText,
+              ),
+              Text(
+                'Width: ${room.width}',
+                style: AppFonts.boldWhiteText,
+              ),
+              Text(
+                'Height: ${room.height}',
+                style: AppFonts.boldWhiteText,
+              ),
+              const SizedBox(
+                height: AppDimens.PADDING_10,
+              ),
+              Text(
+                'Enter item dimensions',
+                style: AppFonts.boldWhiteText,
+              ),
+              const SizedBox(
+                height: AppDimens.PADDING_16,
+              ),
+              CustomTextField(
+                label: 'Height:',
+                controller: itemHeightController,
+              ),
+              CustomTextField(
+                label: 'Width:',
+                controller: itemWidthController,
+              ),
+              CustomTextField(
+                label: 'Length:',
+                controller: itemLengthController,
+              ),
+              const SizedBox(height: AppDimens.PADDING_20),
+              ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: colors.lightBlueColor,
+                  fixedSize: const Size.fromWidth(200),
                 ),
-                Text(
-                  'Enter item dimensions',
+                onPressed: () {},
+                child: Text(
+                  'Check',
                   style: AppFonts.boldWhiteText,
                 ),
-                const SizedBox(height: AppDimens.PADDING_16),
-                CustomTextField(
-                    label: 'Height:', controller: itemHeightController),
-                CustomTextField(
-                    label: 'Width:', controller: itemWidthController),
-                CustomTextField(
-                    label: 'Length:', controller: itemLengthController),
-                const SizedBox(height: AppDimens.PADDING_20),
-                ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                        backgroundColor: colors.lightBlueColor,
-                        fixedSize: const Size.fromWidth(200)),
-                    onPressed: () {},
-                    child: Text(
-                      'Check',
-                      style: AppFonts.boldWhiteText,
-                    ))
-              ],
-            ),
+              ),
+            ],
           ),
-        ));
+        ),
+      ),
+    );
   }
 }
 
 class CustomTextField extends StatelessWidget {
-  const CustomTextField(
-      {super.key, required this.label, required this.controller});
+  const CustomTextField({
+    super.key,
+    required this.label,
+    required this.controller,
+  });
 
   final String label;
   final TextEditingController controller;
@@ -86,15 +109,24 @@ class CustomTextField extends StatelessWidget {
             labelStyle: TextStyle(color: colors.white),
             border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(12),
-              borderSide: BorderSide(width: 2, color: colors.lightBlueColor),
+              borderSide: BorderSide(
+                width: 2,
+                color: colors.lightBlueColor,
+              ),
             ),
             enabledBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(12),
-              borderSide: BorderSide(width: 2, color: colors.lightBlueColor),
+              borderSide: BorderSide(
+                width: 2,
+                color: colors.lightBlueColor,
+              ),
             ),
             focusedBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(12),
-              borderSide: BorderSide(width: 2, color: colors.lightBlueColor),
+              borderSide: BorderSide(
+                width: 2,
+                color: colors.lightBlueColor,
+              ),
             ),
           ),
           style: TextStyle(color: colors.white),

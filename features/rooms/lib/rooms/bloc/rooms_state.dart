@@ -10,6 +10,14 @@ class RoomLoaded extends RoomState {
   final List<Room> rooms;
 
   RoomLoaded({required this.rooms});
+
+  RoomLoaded copyWith({
+    List<Room>? rooms,
+  }) {
+    return RoomLoaded(
+      rooms: rooms ?? this.rooms,
+    );
+  }
 }
 
 class RoomLoadingFailure extends RoomState {

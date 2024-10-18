@@ -16,7 +16,8 @@ class RoomCubit extends Cubit<RoomState> {
     try {
       emit(RoomLoading());
       final List<Room> rooms = await getAllRoomsUseCase.execute();
-      emit(RoomLoaded(rooms: rooms));
+      final oldState = state as RoomLoaded;
+      emit(oldState.copyWith(rooms: rooms));
     } catch (e) {
       emit(RoomLoadingFailure('Failed'));
     }
