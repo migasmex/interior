@@ -29,6 +29,8 @@ dependencies:
     path: ./features/profile
   main:
     path: ./features/main
+  dimensions:
+    path: ./features/dimensions
 
 
   cupertino_icons: ^1.0.6
