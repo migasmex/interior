@@ -25,9 +25,3 @@ class RoomLoadingFailure extends RoomState {
 
   RoomLoadingFailure(this.message);
 }
-
-class RoomAdded extends RoomState {
-  final Room room;
-
-  RoomAdded(this.room);
-}

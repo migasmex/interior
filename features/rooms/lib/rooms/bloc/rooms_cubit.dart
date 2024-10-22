@@ -16,8 +16,8 @@ class RoomCubit extends Cubit<RoomState> {
     try {
       emit(RoomLoading());
       final List<Room> rooms = await getAllRoomsUseCase.execute();
-      final oldState = state as RoomLoaded;
-      emit(oldState.copyWith(rooms: rooms));
+
+      emit(RoomLoaded(rooms: rooms));
     } catch (e) {
       emit(RoomLoadingFailure('Failed'));
     }
@@ -26,7 +26,6 @@ class RoomCubit extends Cubit<RoomState> {
   Future<void> addRoom(Room room) async {
     try {
       await addRoomUseCase.execute(room);
-      emit(RoomAdded(room));
       await fetchRooms();
     } catch (e) {
       emit(RoomLoadingFailure('failed to add'));
