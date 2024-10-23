@@ -1,8 +1,8 @@
 import 'package:auto_route/annotations.dart';
-import 'package:data/data.dart';
 import 'package:domain/domain.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:get_it/get_it.dart';
 
 import '../bloc/rooms_cubit.dart';
 import 'rooms_screen.dart';
@@ -13,11 +13,9 @@ class WrapperScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final roomRepository = MockRoomRepository();
+    final getAllRoomsUseCase = GetIt.instance<GetAllRoomsUseCase>();
 
-    final getAllRoomsUseCase =
-        GetAllRoomsUseCase(roomRepository: roomRepository);
-    final addRoomUseCase = AddRoomUseCase(roomRepository: roomRepository);
+    final addRoomUseCase = GetIt.instance<AddRoomUseCase>();
 
     return BlocProvider(
       create: (context) => RoomCubit(

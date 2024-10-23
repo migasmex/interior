@@ -3,6 +3,7 @@ import 'package:core_ui/core_ui.dart';
 import 'package:domain/domain.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
 import '../bloc/dimensions_cubit.dart';
 
 @RoutePage()
@@ -101,10 +102,10 @@ class DimensionsScreen extends StatelessWidget {
                         final double itemHeight =
                             double.tryParse(itemHeightController.text) ?? 0.0;
                         context.read<DimensionsCubit>().checkDimensions(
-                              room,
-                              itemLength,
-                              itemWidth,
-                              itemHeight,
+                              room: room,
+                              itemLength: itemLength,
+                              itemWidth: itemWidth,
+                              itemHeight: itemHeight,
                             );
                         print(
                             'Item dimensions: length=$itemLength, width=$itemWidth, height=$itemHeight');

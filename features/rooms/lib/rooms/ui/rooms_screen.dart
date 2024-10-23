@@ -7,19 +7,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../bloc/rooms_cubit.dart';
 
-class RoomsScreen extends StatefulWidget {
+class RoomsScreen extends StatelessWidget {
   const RoomsScreen({super.key});
-
-  @override
-  State<RoomsScreen> createState() => _RoomsScreenState();
-}
-
-class _RoomsScreenState extends State<RoomsScreen> {
-  // final List<String> rooms = [];
-
-  void initState() {
-    super.initState();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -89,6 +78,10 @@ class _RoomsScreenState extends State<RoomsScreen> {
     );
   }
 
+  void closeDialog(BuildContext dialogContext) {
+    Navigator.of(dialogContext).pop();
+  }
+
   void addRoomShowDialog(BuildContext context) {
     final TextEditingController controller = TextEditingController();
     final AppColors colors = AppColors.of(context);
@@ -116,7 +109,7 @@ class _RoomsScreenState extends State<RoomsScreen> {
           ),
           actions: <Widget>[
             TextButton(
-              onPressed: () => Navigator.of(dialogContext).pop(),
+              onPressed: () => closeDialog(dialogContext),
               child: Text(
                 'Cancel',
                 style: TextStyle(color: colors.blackColor),
@@ -134,7 +127,7 @@ class _RoomsScreenState extends State<RoomsScreen> {
                     length: 300,
                   );
                   roomCubit.addRoom(newRoom);
-                  Navigator.of(dialogContext).pop();
+                  closeDialog(dialogContext);
                 }
               },
               child: Text(

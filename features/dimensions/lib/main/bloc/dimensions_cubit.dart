@@ -6,8 +6,12 @@ part 'package:dimensions/main/bloc/dimensions_state.dart';
 class DimensionsCubit extends Cubit<DimensionsState> {
   DimensionsCubit() : super(DimensionsInitial());
 
-  void checkDimensions(
-      Room room, double itemLength, double itemWidth, double itemHeight) {
+  void checkDimensions({
+    required Room room,
+    required double itemLength,
+    required double itemWidth,
+    required double itemHeight,
+  }) {
     final bool isFit = itemLength <= room.length &&
         itemWidth <= room.width &&
         itemHeight <= room.height;
